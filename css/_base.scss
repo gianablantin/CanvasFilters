@@ -77,6 +77,11 @@ $base-font-family    : 'Lato', helvetica, arial, sans-serif,serif;
             @content;
         }
     }
+    @else {
+        @media only screen and (min-width: $media-width) {
+            @content;
+        }
+    }
 }
 
 @mixin small-query($media-width) {
@@ -87,6 +92,11 @@ $base-font-family    : 'Lato', helvetica, arial, sans-serif,serif;
     }
     @else if $media-width == tablet {
         @media only screen and (max-width: 991px) {
+            @content;
+        }
+    }
+    @else {
+        @media only screen and (max-width: $media-width) {
             @content;
         }
     }

@@ -2,7 +2,6 @@
 @import "base";
 
 body {
-    background: $medium url('../img/bg-pattern.png');
     color: $white;
     font: #{$base-font-size}/#{$base-line-height} "Lato", sans-serif;
 }
@@ -62,6 +61,80 @@ p {
         } @else {
             font-weight: 400;
         }
+    }
+}
+
+
+// Header section
+
+.abs {
+    position: absolute;
+}
+
+.header {
+    position: relative;
+        z-index: 1;
+
+    &-img {
+        display: block;
+    }
+
+    &-intro {
+        background: rgba($secondary,.5);
+        padding: 3em;
+             left: 0;
+            right: 0;
+            top: 47%;
+        text-align: center;
+    }
+
+    &-title {
+        @include alignType($h2-size);
+    }
+
+    &-before,
+    &-after {
+        font-size: 5vw;
+        font-weight: bold;
+        line-height: 1;
+        margin: 0;
+    }
+
+    &-before {
+        bottom: 2.5vw;
+        left: 2.5vw;
+    }
+
+    &-after {
+        top: 2.5vw;
+        right: 2.5vw;
+    }
+
+}
+
+@include media-query(widescreen) {
+    .header-before {
+        position: fixed;
+    }
+}
+
+
+
+.btn {
+    background: $primary;
+    border: 0;
+    color: $white;
+    display: inline-block;
+    font: inherit;
+    text-decoration: none;
+
+    @include alignType($h3-size);
+    padding: 0.75rem;
+
+    &:hover {
+        background: $primary-light;
+        border: 0;
+        color: $white;
     }
 }
 
