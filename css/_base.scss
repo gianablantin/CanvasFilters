@@ -1,42 +1,90 @@
+//*=================  Variables  ================*//
+
 // Colors
-$primary: #eca152;
-$secondary: #169094;
+$white               :               #fff;
 
-$dark: #13141c;
-$medium: #1d1f2b;
-$light: #252732;
+$primary             :            #eca152;
+$secondary           :            #169094;
 
-$white: #fff;
+$dark                :             #13141c;
+$medium              :             #1d1f2b;
+$light               :             #252732;
 
-$font-size: 16px;
-$line-height: 1.5rem; //24px
-$half-line: $line-height/2;
+// Fonts
+$base-font-size      :                16px;
+$base-line-height    :              1.5rem; // 24px
+$base-half-line      : $base-line-height/2; // 12px
 
-// Mixins
+$h1-size             :                3rem; // 48px
+$h2-size             :             2.25rem; // 36px
+$h3-size             :              1.5rem; // 24px
+$h4-size             :                1rem; // 16px
+$h5-size             :            0.875rem; // 14px
+$h6-size             :             0.75rem; // 12px
+
+$base-font-family    : 'Lato', helvetica, arial, sans-serif,serif;
+
+
+//*==============  Vertical Rhythm  =============*//
+
 @mixin alignType($new-size) {
 
     font-size: $new-size;
-    $text-lines: ceil($new-size/$half-line); // Count how many half-grid spaces the text takes up
-    line-height: $text-lines * $half-line; // Set line-height to # of half-grid spaces
+    $text-lines: ceil($new-size/$base-half-line); // Count how many half-grid spaces the text takes up
+    line-height: $text-lines * $base-half-line; // Set line-height to # of half-grid spaces
 
     @if $text-lines >= 3 { // For large text
-        margin-top: $line-height;
-        margin-bottom: $line-height;
+        margin-top: $base-line-height;
+        margin-bottom: $base-line-height;
     } @else { // For small text
-        margin-top: $half-line;
-        margin-bottom: $half-line;
+        margin-top: $base-half-line;
+        margin-bottom: $base-half-line;
     }
 }
 
 @mixin alignBorder($direction, $size, $style) {
 
-    $remSize: $size/$font-size; // Convert border px width to rem
+    $remSize: $size/$base-font-size; // Convert border px width to rem
     border-#{$direction}: $remSize+ rem $style; // Set border
 
     @if($size < 12px) { // For small borders
-        padding-#{$direction}: $half-line - $remSize;
+        padding-#{$direction}: $base-half-line - $remSize;
     } @else { // For large borders
-        padding-#{$direction}: ($half-line - $remSize) + $half-line;
+        padding-#{$direction}: ($base-half-line - $remSize) + $base-half-line;
     }
 
+}
+
+
+//*==============  Media queries  ===============*//
+
+@mixin media-query($media-width) {
+    @if $media-width == tablet {
+        @media only screen and (min-width: 768px) {
+            @content;
+        }
+    }
+    @else if $media-width == desktop {
+        @media only screen and (min-width: 992px) {
+            @content;
+        }
+    }
+    @else if $media-width == widescreen {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    }
+}
+
+@mixin small-query($media-width) {
+    @if $media-width == mobile {
+        @media only screen and (max-width: 767px) {
+            @content;
+        }
+    }
+    @else if $media-width == tablet {
+        @media only screen and (max-width: 991px) {
+            @content;
+        }
+    }
 }
