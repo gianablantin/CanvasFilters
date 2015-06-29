@@ -1,0 +1,34 @@
+@import "normalize";
+@import "base";
+
+body {
+    background: $medium url('../img/bg-pattern.png') repeat;
+    color: $white;
+    font: 16px/1.5 "Lato",sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+p {
+    margin-top: $line-height;
+    margin-bottom: $line-height;
+}
+
+h1 {
+    @include alignType(3.998rem);
+}
+
+h2 {
+    @include alignType(2.827rem);
+}
+
+h3 {
+    @include alignType(1.999rem);
+}
+
+h4 {
+    @include alignType(1.414rem);
+}
+

@@ -1,0 +1,42 @@
+// Colors
+$primary: #eca152;
+$secondary: #169094;
+
+$dark: #13141c;
+$medium: #1d1f2b;
+$light: #252732;
+
+$white: #fff;
+
+$font-size: 16px;
+$line-height: 1.5rem; //24px
+$half-line: $line-height/2;
+
+// Mixins
+@mixin alignType($new-size) {
+
+    font-size: $new-size;
+    $text-lines: ceil($new-size/$half-line); // Count how many half-grid spaces the text takes up
+    line-height: $text-lines * $half-line; // Set line-height to # of half-grid spaces
+
+    @if $text-lines >= 3 { // For large text
+        margin-top: $line-height;
+        margin-bottom: $line-height;
+    } @else { // For small text
+        margin-top: $half-line;
+        margin-bottom: $half-line;
+    }
+}
+
+@mixin alignBorder($direction, $size, $style) {
+
+    $remSize: $size/$font-size; // Convert border px width to rem
+    border-#{$direction}: $remSize+ rem $style; // Set border
+
+    @if($size < 12px) { // For small borders
+        padding-#{$direction}: $half-line - $remSize;
+    } @else { // For large borders
+        padding-#{$direction}: ($half-line - $remSize) + $half-line;
+    }
+
+}
