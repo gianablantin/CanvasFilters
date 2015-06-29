@@ -2,6 +2,7 @@
 @import "base";
 
 body {
+    background: $medium;
     color: $white;
     font: #{$base-font-size}/#{$base-line-height} "Lato", sans-serif;
 }
@@ -18,7 +19,7 @@ a {
     }
 
     &:focus {
-        border: 1px dotted $secondary;
+        outline: 1px dotted $secondary;
     }
 
 }
@@ -40,6 +41,10 @@ img {
 p {
     margin-top: $base-line-height;
     margin-bottom: $base-line-height;
+}
+
+small {
+    @include alignType($h6-size);
 }
 
 // Headings
@@ -65,7 +70,7 @@ p {
 }
 
 
-// Header section
+/* Header section */
 
 .abs {
     position: absolute;
@@ -118,23 +123,101 @@ p {
     }
 }
 
-
-
 .btn {
     background: $primary;
     border: 0;
     color: $white;
     display: inline-block;
     font: inherit;
+    padding: 0.75rem;
     text-decoration: none;
+    transition: all 0.5s;
 
     @include alignType($h3-size);
-    padding: 0.75rem;
 
     &:hover {
         background: $primary-light;
         border: 0;
         color: $white;
+    }
+}
+
+/* Editor section */
+
+.editor-section {
+    background: $medium url('../img/bg-pattern.png');
+    border-top: $base-half-line solid $primary;
+    position: relative;
+        z-index: 100;
+    text-align: center;
+
+    @extend .clearfix;
+}
+
+.effects-sidebar {
+    background: $dark;
+    box-sizing: border-box;
+    float: left;
+    max-width: $base-line-height * 12;
+    overflow: hidden;
+    padding: $base-line-height * 1.5;
+    width: 100%;
+
+    h3 {
+        text-align: left;
+    }
+}
+
+.effects {
+    margin-bottom: $base-line-height;
+}
+
+.effect {
+    cursor: pointer;
+    display: block;
+    position: relative;
+
+    img {
+        border: $base-half-line solid $light;
+        display: block;
+        transition: all 0.5s;
+    }
+
+    input {
+        display: none;
+
+        &:checked + img {
+            border: $base-half-line solid $primary;
+        }
+
+        &:checked + img + .effect-name {
+            opacity: 1;
+        }
+    }
+
+    &-name {
+        background: rgba($tertiary, .54);
+        font-size: $h3-size;
+        padding: $base-half-line;
+        position: absolute;
+            bottom: $base-half-line;
+            left: $base-half-line;
+            right: $base-half-line;
+        text-align: left;
+        opacity: 0;
+        transition: all 0.5s;
+    }
+
+    &:hover .effect-name {
+        opacity: 1;
+    }
+}
+
+.btn-secondary {
+    background: $secondary;
+
+    &:hover {
+        background: $secondary-light;
     }
 }
 
