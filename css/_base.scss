@@ -4,6 +4,9 @@
 $white               :               #fff;
 
 $primary             :            #eca152;
+$primary-light       :
+lighten(saturate($primary, 100%), 8%);
+
 $secondary           :            #169094;
 
 $dark                :             #13141c;

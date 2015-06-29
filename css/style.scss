@@ -2,9 +2,36 @@
 @import "base";
 
 body {
-    background: $medium url('../img/bg-pattern.png') repeat;
+    background: $medium url('../img/bg-pattern.png');
     color: $white;
-    font: 16px/1.5 "Lato",sans-serif;
+    font: #{$base-font-size}/#{$base-line-height} "Lato", sans-serif;
+}
+
+a {
+    border-bottom: 1px solid transparent;
+    color: $primary;
+    text-decoration: none;
+    transition: 0.5s all;
+
+    &:hover {
+        color: $primary-light;
+        border-bottom: 1px solid $secondary;
+    }
+
+    &:focus {
+        border: 1px dotted $secondary;
+    }
+
+}
+
+::-moz-selection {
+    background: $secondary;
+    color: $white;
+}
+
+::selection {
+    background: $secondary;
+    color: $white;
 }
 
 img {
@@ -12,23 +39,40 @@ img {
 }
 
 p {
-    margin-top: $line-height;
-    margin-bottom: $line-height;
+    margin-top: $base-line-height;
+    margin-bottom: $base-line-height;
 }
 
-h1 {
-    @include alignType(3.998rem);
+// Headings
+@for $num from 1 through 6 {
+    $heading-sizes: ( // Map font-size variables
+        1: $h1-size,
+        2: $h2-size,
+        3: $h3-size,
+        4: $h4-size,
+        5: $h5-size,
+        6: $h6-size
+    );
+
+    h#{$num} { // Each heading
+        @include alignType(map-get($heading-sizes, $num)); // Set heading styles via mixin
+
+        @if ($num < 4) { // For headings 1-4
+            font-weight: 300;
+        } @else {
+            font-weight: 400;
+        }
+    }
 }
 
-h2 {
-    @include alignType(2.827rem);
-}
+.clearfix {
+    &::before,
+    &::after {
+        content: " ";
+        display: table;
+    }
 
-h3 {
-    @include alignType(1.999rem);
+    &::after {
+        clear: both;
+    }
 }
-
-h4 {
-    @include alignType(1.414rem);
-}
-
