@@ -79,6 +79,9 @@ small {
 .header {
     position: relative;
         z-index: 1;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: all 0.25s;
 
     &-img {
         display: block;
@@ -117,6 +120,7 @@ small {
 
 }
 
+
 @include media-query(widescreen) {
     .header-before {
         position: fixed;
@@ -127,6 +131,7 @@ small {
     background: $primary;
     border: 0;
     color: $white;
+    cursor: pointer;
     display: inline-block;
     font: inherit;
     padding: 0.75rem;
@@ -165,6 +170,7 @@ small {
 .btn-scroll {
     background: 0;
     padding: 0;
+    flex: none;
 }
 
 .down-arrow,
@@ -183,6 +189,18 @@ small {
 .down-arrow {
     border-top-color: $white;
     top: $base-line-height;
+}
+
+.btn-scroll[disabled]:hover {
+    background: none;
+}
+
+.btn-scroll[disabled] .down-arrow {
+    border-top-color: $light;
+}
+
+.btn-scroll[disabled] .up-arrow {
+    border-bottom-color: $light;
 }
 
 .editor-section {
@@ -214,6 +232,15 @@ small {
     }
 }
 
+.effects-wrapper {
+    flex: 1;
+        display: flex;
+        flex-direction: column;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all 1s;
+}
+
 .effects {
     flex: 1;
     overflow: hidden;
@@ -233,6 +260,7 @@ small {
     position: relative;
     overflow: hidden;
     transition: all 0.5s;
+    transform: translate3d(0,0,0);
 
     img {
         display: block;
@@ -256,6 +284,15 @@ small {
     }
 }
 
+.radio-effect:first-child + .effect {
+    border-top: $base-half-line solid $light;
+}
+
+.effect:last-child {
+    border-bottom: $base-half-line solid $light;
+    box-shadow: 0 0 0 red;
+}
+
 .radio-effect:checked + .effect {
     border: $base-half-line solid $primary;
 }
@@ -264,6 +301,13 @@ small {
     opacity: 1;
 }
 
+.btn-collapse {
+    background: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-height: $base-line-height * 2;
+}
 
 /* Photo area */
 
@@ -290,6 +334,10 @@ small {
 .canvas {
     display: block;
     outline: 1px dashed $light;
+    max-width: 100%;
+    max-height: 58vh;
+    position: relative;
+    z-index: 10;
 }
 
 .upload-text {
@@ -300,6 +348,7 @@ small {
         left: 50%;
         top: 50%;
     transform: translate3d(-50%,-100%,0);
+    z-index: 1;
 
     @include alignType($h2-size);
 }
@@ -314,7 +363,7 @@ small {
         right: 0;
         bottom: 0;
     width: 100%;
-    z-index: 0;
+    z-index: 100;
 }
 
 .filename-text {
@@ -337,9 +386,9 @@ small {
 }
 
 .hidden {
-    display: none;
+    max-height: 0;
+    transition: all 0.65s;
 }
-
 
 .clearfix {
     &::before,
