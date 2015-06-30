@@ -144,12 +144,52 @@ small {
 
 /* Editor section */
 
+.btn-secondary {
+    background: $secondary;
+
+    &:hover {
+        background: $secondary-light;
+    }
+}
+
+.upload-container,
+.btn-scroll {
+    flex: none;
+    margin:0;
+}
+
+.btn-scroll {
+    background: 0;
+    padding: 0;
+}
+
+.down-arrow,
+.up-arrow {
+    width: 0;
+    height: 0;
+    border: 16px solid transparent;
+    position: relative;
+}
+
+.up-arrow {
+    border-bottom-color: $white;
+    top: -$base-line-height;
+}
+
+.down-arrow {
+    border-top-color: $white;
+    top: $base-line-height;
+}
+
 .editor-section {
     background: $medium url('../img/bg-pattern.png');
     border-top: $base-half-line solid $primary;
+    display: flex;
     position: relative;
         z-index: 100;
     text-align: center;
+
+    height: 100vh;
 
     @extend .clearfix;
 }
@@ -157,42 +197,41 @@ small {
 .effects-sidebar {
     background: $dark;
     box-sizing: border-box;
-    float: left;
-    max-width: $base-line-height * 12;
-    overflow: hidden;
-    padding: $base-line-height * 1.5;
+    flex: 0 0 $base-line-height * 12;
+        order: -1;
+        display: flex;
+        flex-direction: column;
+    padding: $base-line-height $base-line-height * 1.5;
     width: 100%;
 
     h3 {
         text-align: left;
+        flex: none;
     }
 }
 
 .effects {
-    margin-bottom: $base-line-height;
+    flex: 1;
+    overflow: hidden;
+}
+
+.radio-effect {
+    display: none;
 }
 
 .effect {
+    border: $base-half-line solid $light;
+    border-top-width: $base-half-line/2;
+    border-bottom-width: $base-half-line/2;
     cursor: pointer;
     display: block;
+    max-height: 20vh;
     position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
 
     img {
-        border: $base-half-line solid $light;
         display: block;
-        transition: all 0.5s;
-    }
-
-    input {
-        display: none;
-
-        &:checked + img {
-            border: $base-half-line solid $primary;
-        }
-
-        &:checked + img + .effect-name {
-            opacity: 1;
-        }
     }
 
     &-name {
@@ -200,9 +239,9 @@ small {
         font-size: $h3-size;
         padding: $base-half-line;
         position: absolute;
-            bottom: $base-half-line;
-            left: $base-half-line;
-            right: $base-half-line;
+            bottom: 0;
+            left: 0;
+            right: 0;
         text-align: left;
         opacity: 0;
         transition: all 0.5s;
@@ -213,12 +252,19 @@ small {
     }
 }
 
-.btn-secondary {
-    background: $secondary;
+.radio-effect:checked + .effect {
+    border: $base-half-line solid $primary;
+}
 
-    &:hover {
-        background: $secondary-light;
-    }
+.radio-effect:checked + .effect .effect-name {
+    opacity: 1;
+}
+
+
+
+
+.photo {
+    flex: 1;
 }
 
 .clearfix {
