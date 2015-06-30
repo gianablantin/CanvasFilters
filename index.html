@@ -25,10 +25,14 @@
     <div class="photo-section">
         <div class="photo-wrapper">
             <div class="canvas-wrapper">
+            <label for="canvas-upload">
+                <p class="upload-text">Upload Photo</small></p>
                 <canvas id="canvas" class="canvas" width="854" height="480"></canvas>
+                <input type="file" id="canvas-upload" class="file-upload">
+            </label>
             </div>
 
-            <p class="filename">cute-dog-filtered.jpg</p>
+            <p class="filename-text"><input type="text" class="filename" value="your-photo-filtered">.jpg</p>
 
             <p>
                 <button class="btn btn-download">Download</button>
@@ -90,17 +94,21 @@
 
         <h3>Borders</h3>
 
-        <div class="effects">
+        <div class="effects hidden">
 
         </div>
 
         <p class="upload-container">
-            <button class="btn btn-secondary">Upload image</button>
+            <label class="btn btn-secondary upload-button">
+                <input type="file" id="sidebar-upload" class="file-upload">
+                Upload image
+            </label>
             <br><small>Don't forget to download your image</small>
         </p>
     </div>
 
 </section>
 
+<script src="js/scripts.js"></script>
 </body>
 </html>

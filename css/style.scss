@@ -158,6 +158,10 @@ small {
     margin:0;
 }
 
+.upload-button {
+    position: relative;
+}
+
 .btn-scroll {
     background: 0;
     padding: 0;
@@ -202,7 +206,7 @@ small {
         display: flex;
         flex-direction: column;
     padding: $base-line-height $base-line-height * 1.5;
-    width: 100%;
+    max-width: 18rem;
 
     h3 {
         text-align: left;
@@ -278,13 +282,53 @@ small {
     border: 0.0625rem solid $light;
     box-shadow: inset 0px 0px 8px #0e0f15;
     display: inline-block;
-    margin: $base-line-height auto;
+    margin: $base-line-height auto 0;
     padding: 0.6875rem;
     position: relative;
 }
 
 .canvas {
     display: block;
+    outline: 1px dashed $light;
+}
+
+.upload-text {
+    color: $light;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+        left: 50%;
+        top: 50%;
+    transform: translate3d(-50%,-100%,0);
+
+    @include alignType($h2-size);
+}
+
+.file-upload {
+    cursor: pointer;
+    font-size: 1px;
+    opacity: 0;
+    position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.filename-text {
+    font-weight: 700;
+
+    @include alignType($h3-size);
+}
+
+.filename {
+    background: none;
+    border: 0;
+    font: inherit;
+    text-align: right;
+    width: 209px; // varies
 }
 
 .btn-download {
@@ -292,10 +336,10 @@ small {
     font-weight: 700;
 }
 
-.filename {
-    @include alignType($h3-size);
-    font-weight: 700;
+.hidden {
+    display: none;
 }
+
 
 .clearfix {
     &::before,
