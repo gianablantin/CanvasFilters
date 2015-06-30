@@ -261,10 +261,40 @@ small {
 }
 
 
+/* Photo area */
 
-
-.photo {
+.photo-section {
     flex: 1;
+        display: flex;
+        align-items: center;
+}
+
+.photo-wrapper {
+    flex: 1;
+}
+
+.canvas-wrapper {
+    background: $dark;
+    border: 0.0625rem solid $light;
+    box-shadow: inset 0px 0px 8px #0e0f15;
+    display: inline-block;
+    margin: $base-line-height auto;
+    padding: 0.6875rem;
+    position: relative;
+}
+
+.canvas {
+    display: block;
+}
+
+.btn-download {
+    padding: $base-line-height $base-line-height + $base-half-line;
+    font-weight: 700;
+}
+
+.filename {
+    @include alignType($h3-size);
+    font-weight: 700;
 }
 
 .clearfix {
