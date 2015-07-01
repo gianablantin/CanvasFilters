@@ -131,6 +131,11 @@ small {
         border: 0;
         color: $white;
     }
+
+    &:focus {
+        border: 0;
+        outline: 1ps dotted $secondary;
+    }
 }
 
 .btn-secondary {
@@ -138,6 +143,10 @@ small {
 
     &:hover {
         background: $secondary-light;
+    }
+
+    &:focus {
+        outline: 1px dotted $tertiary;
     }
 }
 
@@ -177,6 +186,33 @@ small {
             margin: 0;
             padding: 0;
             min-height: $base-line-height * 2;
+            transition: all 0.5s;
+
+            &:hover {
+                color: $secondary;
+            }
+
+            &:focus {
+                border: 0;
+                outline: 1px dotted $secondary;
+            }
+        }
+
+        .arrow-small {
+            content: " ";
+            display: block;
+            border: 8px solid transparent;
+            border-left-color: $secondary;
+            width: 0;
+            height: 0;
+            float: left;
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+            transition: all 0.25s;
+        }
+
+        .arrow-down {
+            transform: rotate(90deg);
         }
 
         .upload-container,
@@ -396,17 +432,32 @@ small {
         border-bottom: 1px dotted $secondary;
         font: inherit;
         text-align: right;
+
+        &:focus {
+            border: 0;
+            border-bottom: 1px dotted $primary;
+            outline: 0;
+        }
     }
 }
 
 .btn-small {
     font-weight: 700;
+    margin-left: 0.5rem;
     @include alignType($h6-size);
 }
 
 .btn-download {
     padding: $base-line-height $base-line-height + $base-half-line;
     font-weight: 700;
+}
+
+.footer {
+    background: $dark;
+    position: relative;
+        z-index: 100;
+    padding: 2.25rem;
+    text-align: left;
 }
 
 .hidden {
