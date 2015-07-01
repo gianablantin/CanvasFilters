@@ -1,6 +1,8 @@
 @import "normalize";
 @import "base";
 
+//*===============  General Styles  ==============*//
+
 body {
     background: $medium;
     color: $white;
@@ -21,7 +23,6 @@ a {
     &:focus {
         outline: 1px dotted $secondary;
     }
-
 }
 
 ::-moz-selection {
@@ -43,61 +44,43 @@ p {
     margin-bottom: $base-line-height;
 }
 
+h1 {
+    font-weight: 300;
+    @include alignType($h1-size);
+}
+
+h3 {
+    font-weight: 300;
+    @include alignType($h3-size);
+}
+
 small {
     @include alignType($h6-size);
 }
 
-// Headings
-@for $num from 1 through 6 {
-    $heading-sizes: ( // Map font-size variables
-        1: $h1-size,
-        2: $h2-size,
-        3: $h3-size,
-        4: $h4-size,
-        5: $h5-size,
-        6: $h6-size
-    );
 
-    h#{$num} { // Each heading
-        @include alignType(map-get($heading-sizes, $num)); // Set heading styles via mixin
-
-        @if ($num < 4) { // For headings 1-4
-            font-weight: 300;
-        } @else {
-            font-weight: 400;
-        }
-    }
-}
-
-
-/* Header section */
-
-.abs {
-    position: absolute;
-}
+//*==============  Header Section  ==============*//
 
 .header {
     position: relative;
         z-index: 1;
-    max-height: 2000px;
-    overflow: hidden;
+    max-height: 2000px; // To animate height on transition
     transition: all 0.25s;
 
     &-img {
         display: block;
+        max-height: 2000px;
+        width: 100%;
     }
 
     &-intro {
         background: rgba($secondary,.5);
         padding: 3em;
-             left: 0;
-            right: 0;
-            top: 47%;
+        position: absolute;
+                  top: 47%;
+                  right: 0;
+                  left:  0;
         text-align: center;
-    }
-
-    &-title {
-        @include alignType($h2-size);
     }
 
     &-before,
@@ -106,6 +89,7 @@ small {
         font-weight: bold;
         line-height: 1;
         margin: 0;
+        position: absolute;
     }
 
     &-before {
@@ -120,12 +104,14 @@ small {
 
 }
 
-
 @include media-query(widescreen) {
     .header-before {
         position: fixed;
     }
 }
+
+
+//*==================  Buttons  =================*//
 
 .btn {
     background: $primary;
@@ -147,8 +133,6 @@ small {
     }
 }
 
-/* Editor section */
-
 .btn-secondary {
     background: $secondary;
 
@@ -157,79 +141,56 @@ small {
     }
 }
 
-.upload-container,
-.btn-scroll {
-    flex: none;
-    margin:0;
-}
 
-.upload-button {
-    position: relative;
-}
-
-.btn-scroll {
-    background: 0;
-    padding: 0;
-    flex: none;
-}
-
-.down-arrow,
-.up-arrow {
-    width: 0;
-    height: 0;
-    border: 16px solid transparent;
-    position: relative;
-}
-
-.up-arrow {
-    border-bottom-color: $white;
-    top: -$base-line-height;
-}
-
-.down-arrow {
-    border-top-color: $white;
-    top: $base-line-height;
-}
-
-.btn-scroll[disabled]:hover {
-    background: none;
-}
-
-.btn-scroll[disabled] .down-arrow {
-    border-top-color: $light;
-}
-
-.btn-scroll[disabled] .up-arrow {
-    border-bottom-color: $light;
-}
+//*==============  Editor Section  ==============*//
 
 .editor-section {
     background: $medium url('../img/bg-pattern.png');
-    border-top: $base-half-line solid $primary;
+    border-top: 1vh solid $primary;
     display: flex;
+    height: 99vh;
     position: relative;
-        z-index: 100;
+          z-index: 100;
     text-align: center;
-
-    height: 100vh;
-
-    @extend .clearfix;
 }
 
-.effects-sidebar {
+.editor-sidebar {
     background: $dark;
     box-sizing: border-box;
     flex: 0 0 $base-line-height * 12;
-        order: -1;
-        display: flex;
-        flex-direction: column;
+                           order: -1;
+                       display: flex;
+              flex-direction: column;
     padding: $base-line-height $base-line-height * 1.5;
-    max-width: 18rem;
+    max-width: 18rem; // For IE. Flexbox + box-sizing bug?
 
-    h3 {
-        text-align: left;
-        flex: none;
+    @at-root {
+
+        .sidebar-title {
+            text-align: left;
+            flex: none;
+        }
+
+        .btn-collapse {
+            background: none;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            min-height: $base-line-height * 2;
+        }
+
+        .upload-container,
+        .btn-scroll {
+            flex: none;
+            margin:0;
+        }
+
+        .btn-upload {
+            position: relative;
+        }
+
     }
+
 }
 
 .effects-wrapper {
@@ -239,44 +200,115 @@ small {
     max-height: 1000px;
     overflow: hidden;
     transition: all 1s;
+
+    @at-root .effects-group {
+        flex: 1;
+        overflow: hidden;
+    }
 }
 
-.effects {
-    flex: 1;
-    overflow: hidden;
+.btn-scroll {
+    background: 0;
+    padding: 0;
+    flex: none;
+
+    @at-root {
+
+        .down-arrow,
+        .up-arrow {
+            border: 16px solid transparent;
+            position: relative;
+            width: 0;
+            height: 0;
+        }
+
+        .up-arrow {
+            border-bottom-color: $white;
+            top: -$base-line-height;
+        }
+
+        .down-arrow {
+            border-top-color: $white;
+            top: $base-line-height;
+        }
+
+    }
+
+    &[disabled] {
+        &:hover {
+            background: none;
+        }
+
+        .down-arrow {
+            border-top-color: $light;
+        }
+
+        .up-arrow {
+            border-bottom-color: $light;
+        }
+    }
 }
 
 .radio-effect {
     display: none;
 }
 
-.effect {
+.effect-preview {
     border: $base-half-line solid $light;
     border-top-width: $base-half-line/2;
     border-bottom-width: $base-half-line/2;
     cursor: pointer;
     display: block;
     max-height: 20vh;
-    position: relative;
     overflow: hidden;
-    transition: all 0.5s;
+    position: relative;
     transform: translate3d(0,0,0);
+    transition: all 0.5s;
+
+    &:before { // Fix for label (inside <form>) not being triggered by clicking image in IE
+        content: " ";
+        position: absolute;
+                    top: 0;
+                  right: 0;
+                 bottom: 0;
+                   left: 0;
+    }
 
     img {
         display: block;
     }
 
-    &-name {
-        background: rgba($tertiary, .54);
-        font-size: $h3-size;
-        padding: $base-half-line;
-        position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        text-align: left;
-        opacity: 0;
-        transition: all 0.5s;
+    @at-root {
+
+        .radio-effect:first-child + .effect-preview {
+            border-top: $base-half-line solid $light;
+        }
+
+        .effect-preview:last-child {
+            border-bottom: $base-half-line solid $light;
+        }
+
+        .radio-effect:checked + .effect-preview {
+            border: $base-half-line solid $primary;
+
+            .effect-name {
+                opacity: 1;
+            }
+        }
+
+        .effect-name {
+            background: rgba($tertiary, .54);
+            font-size: $h3-size;
+            padding: $base-half-line;
+            position: absolute;
+                     bottom: 0;
+                       left: 0;
+                      right: 0;
+            opacity: 0;
+            text-align: left;
+            transition: all 0.5s;
+        }
+
     }
 
     &:hover .effect-name {
@@ -284,100 +316,92 @@ small {
     }
 }
 
-.radio-effect:first-child + .effect {
-    border-top: $base-half-line solid $light;
-}
 
-.effect:last-child {
-    border-bottom: $base-half-line solid $light;
-    box-shadow: 0 0 0 red;
-}
-
-.radio-effect:checked + .effect {
-    border: $base-half-line solid $primary;
-}
-
-.radio-effect:checked + .effect .effect-name {
-    opacity: 1;
-}
-
-.btn-collapse {
-    background: none;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    min-height: $base-line-height * 2;
-}
-
-/* Photo area */
+//*===============  Photo Section  ==============*//
 
 .photo-section {
     flex: 1;
         display: flex;
         align-items: center;
-}
 
-.photo-wrapper {
-    flex: 1;
+    @at-root .photo-wrapper {
+        flex: 1;
+    }
 }
 
 .canvas-wrapper {
     background: $dark;
     border: 0.0625rem solid $light;
-    box-shadow: inset 0px 0px 8px #0e0f15;
+    box-shadow: inset 0 0 8px #0e0f15;
     display: inline-block;
     margin: $base-line-height auto 0;
     padding: 0.6875rem;
     position: relative;
-}
 
-.canvas {
-    display: block;
-    outline: 1px dashed $light;
-    max-width: 100%;
-    max-height: 58vh;
-    position: relative;
-    z-index: 10;
-}
+    @at-root {
 
-.upload-text {
-    color: $light;
-    font-weight: bold;
-    text-align: center;
-    position: absolute;
-        left: 50%;
-        top: 50%;
-    transform: translate3d(-50%,-100%,0);
-    z-index: 1;
+        .upload-text {
+            color: $light;
+            font-weight: 700;
+            position: absolute;
+                      top: 50%;
+                     left: 50%;
+                    z-index: 1;
+            transform: translate3d(-50%,-100%,0);
 
-    @include alignType($h2-size);
-}
+            @include alignType($h1-size);
+        }
 
-.file-upload {
-    cursor: pointer;
-    font-size: 1px;
-    opacity: 0;
-    position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    width: 100%;
-    z-index: 100;
+        .canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 64vh;
+            outline: 1px dashed $light;
+            position: relative;
+                   z-index: 10;
+        }
+
+        #measureText {
+            position: absolute;
+                     bottom: 0;
+                      right: 0;
+            visibility: hidden;
+        }
+
+        .file-upload {
+            cursor: pointer;
+            font-size: 1px;
+            opacity: 0;
+            position: absolute;
+                        top: 0;
+                      right: 0;
+                     bottom: 0;
+                       left: 0;
+                  z-index: 100;
+            width: 100%;
+        }
+
+    }
+
 }
 
 .filename-text {
     font-weight: 700;
 
     @include alignType($h3-size);
+
+    @at-root .input {
+        background: none;
+        border: 0;
+        border-bottom: 1px dotted $secondary;
+        font: inherit;
+        text-align: right;
+    }
 }
 
-.filename {
-    background: none;
-    border: 0;
-    font: inherit;
-    text-align: right;
-    width: 209px; // varies
+.btn-small {
+    font-weight: 700;
+    @include alignType($h6-size);
 }
 
 .btn-download {
@@ -388,16 +412,4 @@ small {
 .hidden {
     max-height: 0;
     transition: all 0.65s;
-}
-
-.clearfix {
-    &::before,
-    &::after {
-        content: " ";
-        display: table;
-    }
-
-    &::after {
-        clear: both;
-    }
 }
