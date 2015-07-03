@@ -58,6 +58,9 @@ small {
     @include alignType($h6-size);
 }
 
+input[type=number] {
+    width: $base-line-height * 3;
+}
 
 //*==============  Header Section  ==============*//
 
@@ -463,4 +466,47 @@ small {
 .hidden {
     max-height: 0;
     transition: all 0.65s;
+}
+
+//*===============  Media Queries  ==============*//
+// Mobile-first pending
+
+@media only screen and (max-width: 1023px) {
+    .header-intro {
+        padding: 0;
+    }
+
+    .editor-section {
+        display: block;
+        height: auto;
+    }
+
+    .editor-sidebar {
+        display: block;
+        flex: none;
+        max-width: 100%;
+        padding: 1.5vw;
+    }
+
+    .btn-collapse {
+        width: 100%;
+    }
+
+    .effect-preview {
+        border: 0;
+        box-sizing: border-box;
+        float: left;
+        max-width: 19vw;
+        max-height: 19vw;
+    }
+
+    .effect-preview:last-child,
+    .radio-effect:first-child + .effect-preview {
+        border: 0;
+    }
+
+    .btn-scroll {
+        display: none;
+    }
+
 }

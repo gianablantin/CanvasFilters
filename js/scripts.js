@@ -18,7 +18,6 @@ function el(el) {
 
     var togglePanel = function() {
         var arrow = document.querySelectorAll('.arrow-small');
-        console.log(arrow);
         for(var i = 0, l = effectsWrapper.length; i < l; i++) {
             effectsWrapper[i].classList.toggle("hidden");
             arrow[i].classList.toggle('arrow-down');
@@ -44,7 +43,7 @@ var scrollBoxes = function(button) {
     // All the heights
         eBoxHeight = effectBox[1].offsetHeight,
         totalBoxHeight = eBoxHeight * effectBox.length + ((effectBox[0].offsetHeight - eBoxHeight) * 1.5),
-        boxFix = totalBoxHeight - parent.offsetHeight,
+        boxFix = (totalBoxHeight - parent.offsetHeight) + 12,
         reset;
 
     if (button === buttons[1]) {

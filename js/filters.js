@@ -313,7 +313,7 @@
         },
 
         border3: function() {
-            applyColor(createVignette("#000000"),"overlay",0.7);
+            applyColor(createVignette("#000721"),"multiply",0.5);
         },
 
         border4: function(){
